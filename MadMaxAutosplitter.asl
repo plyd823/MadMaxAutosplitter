@@ -3,10 +3,14 @@ state("MadMax")
     int  GameStarted        : 0x17F4EE0, 0xD8, 0x88, 0x68, 0x58, 0x28, 0xC78, 0x3F8;
     int  LoadValue          : 0x193D4D0, 0x58, 0x70, 0x8, 0x1D0, 0x60, 0x28, 0x8;
     bool ObjectiveCompleted : 0x1944730, 0x30, 0x1A0, 0x98, 0x330, 0x0, 0xA8, 0x70, 0x1E8;
+    int ObjectiveActivated : 0x17FCF78, 0x470;
 }
 
 startup
 {
+    settings.Add("IL Timing", false);
+    settings.SetToolTip("IL Timing", "Will start and end timer on completing objective");
+
     var _settings = new Dictionary<string, string[]>
     {
         {
@@ -233,11 +237,16 @@ startup
 
 onStart
 {
-    vars.CurrentObjective = 0;
+    vars.CurrentObjectiveCompleted = 0;
+    vars.CurrentObjectiveActivated = 0;
 }
 
 start
 {
+    if(!old.ObjectiveCompleted && current.ObjectiveCompleted && settings["IL Timing"])
+    {
+        return true;
+    }
     return old.GameStarted < current.GameStarted;
 }
 
@@ -245,9 +254,15 @@ split
 {
     if (!old.ObjectiveCompleted && current.ObjectiveCompleted)
     {
-        int obj = vars.CurrentObjective++;
+        int objc = vars.CurrentObjectiveCompleted++;
 
-        return settings["obj-c-" + obj] || settings["miss-c-" + obj];
+        return settings["obj-c-" + objc] || settings["miss-c-" + objc];
+    }
+    if(current.ObjectiveActivated > old.ObjectiveActivated)
+    {
+        int obja = vars.CurrentObjectiveActivated++;
+
+        return settings["obj-a-" + obja] || settings["miss-a-" + obja];
     }
 }
 
