@@ -247,7 +247,7 @@ split
     {
         int obj = vars.CurrentObjective++;
 
-        return settings["obj-c-" + obj] || settings["ch-c-" + obj];
+        return settings["obj-c-" + obj] || settings["miss-c-" + obj];
     }
 }
 
