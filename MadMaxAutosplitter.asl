@@ -175,6 +175,17 @@ startup
             }
         },
         {
+            "The Big Chief",
+            new[]
+            {
+                "Reach Stank Gum's garage",
+                "Find the Big Chief engine",
+                "Defeat Stank Gum's fighters",
+                "Lower Stank Gum's car",
+                "Drive to Deep Friah's temple"
+            }
+        },
+        {
             "In It For Glory",
             new[]
             {
@@ -199,7 +210,7 @@ startup
             new[]
             {
                 "Defeat Stank Gum",
-                "Drive to Deep Friah's temple"
+                "Drive to Deep Friah's temple (second time)"
             }
         },
         {
