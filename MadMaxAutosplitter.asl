@@ -340,12 +340,15 @@ start
 {
     if (current.GAME_START > old.GAME_START)
     {
-        for(int i = 0; i < 115; i++)
+        if(vars.completedSplitsChecked[0] == false)
         {
-            if(vars.completedSplitsChecked[i] == true)
+            for(int i = 0; i < 115; i++)
             {
-                vars.nextCompletedSplit = i;
-                break;
+                if(vars.completedSplitsChecked[i] == true)
+                {
+                    vars.nextCompletedSplit = i;
+                    break;
+                }
             }
         }
         return true;
