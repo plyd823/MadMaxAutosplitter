@@ -266,7 +266,7 @@ start
 
 split
 {
-    if (!old.ObjectiveCompleted && current.ObjectiveCompleted)
+    if (!old.ObjectiveCompleted && current.ObjectiveCompleted && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(1))
     {
         int objc = vars.CurrentObjectiveCompleted++;
 
