@@ -3,6 +3,7 @@
 state("MadMax")
 {
     float FirstInput: 0x17F5228, 0x20, 0x198;
+    int GameStarted: 0x17F5FE0, 0x178, 0x170, 0x310, 0x720;
     int  LoadValue          : 0x193D4D0, 0x58, 0x70, 0x8, 0x1D0, 0x60, 0x28, 0x8;
     bool ObjectiveCompleted : 0x1944730, 0x30, 0x1A0, 0x98, 0x330, 0x0, 0xA8, 0x70, 0x1E8;
     int ObjectiveActivated : 0x17FCF78, 0x470;
@@ -259,7 +260,7 @@ start
     {
         return true;
     }
-    return current.FirstInput != 0f && current.LoadValue == 0 && !settings["IL Timing"];
+    return current.FirstInput != 0f && current.LoadValue == 0 && current.GameStarted == 1 && !settings["IL Timing"];
 }
 
 split
