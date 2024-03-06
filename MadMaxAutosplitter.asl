@@ -257,7 +257,11 @@ start
     {
         return true;
     }
-    return old.GameStarted < current.GameStarted;
+    if(old.GameStarted < current.GameStarted)
+    {
+        Thread.Sleep(350);
+        return true;
+    }
 }
 
 split
