@@ -262,9 +262,9 @@ start
     }
     if(current.GameStarted == 1 && old.GameStarted == 0)
     {
-        Thread.Sleep(2500);
+        Thread.Sleep(1000);
     }
-    return current.FirstInput != 0f && current.LoadValue == 0 && current.GameStarted == 1 && !settings["IL Timing"];
+    return current.FirstInput > 0f && current.LoadValue == 0 && current.GameStarted == 1 && !settings["IL Timing"];
 }
 
 split
