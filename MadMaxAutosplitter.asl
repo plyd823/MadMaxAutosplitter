@@ -61,7 +61,6 @@ startup
                 "Scout the camp from the lookout point",
                 "Eliminate the sniper",
                 "Disable the flame pipe at the gate",
-                "Enter the camp",
                 "Eliminate the War Crier",
                 "Defeat the War Boys",
                 "Find the remains of Max's Car",
