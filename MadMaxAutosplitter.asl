@@ -1,6 +1,8 @@
+//Load Removal Address found by, and coding by Plyd
+//Objective Activation, Completion and Autostart Addresses found by Streetbackguy
 state("MadMax")
 {
-    int  GameStarted        : 0x17F4EE0, 0xD8, 0x88, 0x68, 0x58, 0x28, 0xC78, 0x3F8;
+    float FirstInput: 0x17F5228, 0x20, 0x198;
     int  LoadValue          : 0x193D4D0, 0x58, 0x70, 0x8, 0x1D0, 0x60, 0x28, 0x8;
     bool ObjectiveCompleted : 0x1944730, 0x30, 0x1A0, 0x98, 0x330, 0x0, 0xA8, 0x70, 0x1E8;
     int ObjectiveActivated : 0x17FCF78, 0x470;
@@ -257,11 +259,7 @@ start
     {
         return true;
     }
-    if(old.GameStarted < current.GameStarted && !settings["IL Timing"])
-    {
-        Thread.Sleep(350);
-        return true;
-    }
+    return current.FirstInput != 0f && current.LoadValue == 0 && !settings["IL Timing"];
 }
 
 split
@@ -282,8 +280,7 @@ split
 
 reset
 {
-    return old.GameStarted != current.GameStarted
-        && current.GameStarted == 0;
+    
 }
 
 isLoading
