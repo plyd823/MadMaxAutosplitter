@@ -257,7 +257,7 @@ start
     {
         return true;
     }
-    if(old.GameStarted < current.GameStarted)
+    if(old.GameStarted < current.GameStarted && !settings["IL Timing"])
     {
         Thread.Sleep(350);
         return true;
