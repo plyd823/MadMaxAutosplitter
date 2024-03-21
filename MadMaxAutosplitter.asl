@@ -14,7 +14,7 @@ startup
     settings.Add("IL Timing", false);
     settings.SetToolTip("IL Timing", "Will start and end timer on completing objective");
 
-    var _settings = new Dictionary<string, string[]>
+    /*var _settings = new Dictionary<string, string[]>
     {
         {
             "Feral Man",
@@ -104,6 +104,7 @@ startup
                 "Use the garage to install upgrades for the Jack",
                 "Drive to Gutgash's stronghold",
                 "Collect the welding wire"
+                ""
             }
         },
         {
@@ -225,12 +226,13 @@ startup
                 "Defeat Scrotus (final time)"
             }
         }
-    };
+    };*/
 
-    settings.Add("miss-a", false, "Split when activating a mission:");
-    settings.Add("miss-c", false, "Split when completing a mission:");
+    settings.Add("miss-a", false, "Split when activating a mission");
+    settings.Add("miss-c", false, "Split when completing a mission");
     
     var i = 0;
+    /*
     foreach (var setting in _settings)
     {
         var final = i + setting.Value.Length - 1; // final objective
@@ -245,7 +247,7 @@ startup
     
             i++;
         }
-    }
+    }*/
 }
 
 onStart
@@ -271,15 +273,15 @@ split
 {
     if (!old.ObjectiveCompleted && current.ObjectiveCompleted && timer.CurrentTime.RealTime > TimeSpan.FromSeconds(1))
     {
-        int objc = vars.CurrentObjectiveCompleted++;
+        //int objc = vars.CurrentObjectiveCompleted++;
 
-        return settings["obj-c-" + objc] || settings["miss-c-" + objc];
+        return settings["miss-c"]; //settings["obj-c-" + objc] || settings["miss-c-" + objc];
     }
     if(current.ObjectiveActivated > old.ObjectiveActivated)
     {
-        int obja = vars.CurrentObjectiveActivated++;
+        //int obja = vars.CurrentObjectiveActivated++;
 
-        return settings["obj-a-" + obja] || settings["miss-a-" + obja];
+        return settings["miss-a"]; //settings["obj-a-" + obja] || settings["miss-a-" + obja];
     }
 }
 
