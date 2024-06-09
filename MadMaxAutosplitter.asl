@@ -3,10 +3,14 @@
 state("MadMax")
 {
     float FirstInput: 0x17F5228, 0x20, 0x198;
-    int GameStarted: 0x17F5FE0, 0x178, 0x170, 0x310, 0x720;
+    //int GameStarted: 0x17F5FE0, 0x178, 0x170, 0x310, 0x720;
     int  LoadValue          : 0x193D4D0, 0x58, 0x70, 0x8, 0x1D0, 0x60, 0x28, 0x8;
     bool ObjectiveCompleted : 0x1944730, 0x30, 0x1A0, 0x98, 0x330, 0x0, 0xA8, 0x70, 0x1E8;
     int ObjectiveActivated : 0x17FCF78, 0x470;
+    float ScavengingLocationsCompleted : 0x01944730, 0x30, 0x40, 0x18, 0x2A0, 0x120, 0x30, 0x1C;
+    float CampsDismantled : 0x01944730, 0x30, 0x40, 0x40, 0x70, 0xE8, 0x8, 0x69C;
+    float StoryMissionsCompleted : 0x1944730, 0x30, 0x70, 0xD8, 0x10, 0x298, 0x90, 0x6DC;
+    float WastelandMissionsCompleted : 0x1944730, 0x28, 0x2E0, 0x38, 0x298, 0x1E8, 0x8, 0x8BC;
 }
 
 startup
@@ -228,8 +232,12 @@ startup
         }
     };*/
 
-    settings.Add("miss-a", false, "Split when activating a mission");
-    settings.Add("miss-c", false, "Split when completing a mission");
+    settings.Add("miss-a", false, "Split when activating an objective");
+    settings.Add("miss-c", false, "Split when completing an objective");
+    settings.Add("Split when completing a scavenging location", false);
+    settings.Add("Split when dismantling a camp", false);
+    settings.Add("Split when completing a story mission", false);
+    settings.Add("Split when completing a wasteland mission", false);
     
     var i = 0;
     /*
@@ -278,6 +286,22 @@ split
         //int obja = vars.CurrentObjectiveActivated++;
 
         return settings["miss-a"]; //settings["obj-a-" + obja] || settings["miss-a-" + obja];
+    }
+    if (settings["Split when completing a scavenging location"] && current.ScavengingLocationsCompleted == old.ScavengingLocationsCompleted + 1)
+    {
+        return true;
+    }
+    if (settings["Split when dismantling a camp"] && current.CampsDismantled == old.CampsDismantled + 1)
+    {
+        return true;
+    }
+    if (settings["Split when completing a story mission"] && current.StoryMissionsCompleted == old.StoryMissionsCompleted + 1)
+    {
+        return true;
+    }
+    if (settings["Split when completing a wasteland mission"] && current.WastelandMissionsCompleted == old.WastelandMissionsCompleted + 1)
+    {
+        return true;
     }
 }
 
